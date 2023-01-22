@@ -3,18 +3,16 @@ import { D1Service as D1Connect } from "../../services/D1Connect";
 
 export const POST: RequestHandler = async ({ request, params, platform }) => {
     let res: Response;
-    if (platform) {
-        const path = params["path"];
-        if (path) {
+    const path = params["path"];
+    if (platform && path) {
 
-            const json = await request.json();
+        const json = await request.json();
 
-            // run d1 call;
-            const connect = new D1Connect(platform);
-            const obj = await connect.fetch(path, json);
+        // run d1 call;
+        const connect = new D1Connect(platform);
+        const obj = await connect.fetch(path, json);
 
-            res = new Response(JSON.stringify(obj));
-        }
+        res = new Response(JSON.stringify(obj));
     } else {
         res = new Response("No Cloudflare Worker");
     }

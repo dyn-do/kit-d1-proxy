@@ -26,10 +26,11 @@ export const load = (async ({ platform }) => {
             for (let [k, v] of Object.entries(platform.env)) {
                 data[k] = v.toString();
             }
+            data["____0"] = _fetch("1", undefined).toString();
             data["____"] = _fetch.toString();
             data["____2"] = _fetch.constructor.toString();
             data["_____3"] = _fetch.constructor.name;
-            // return { "result": [], "test": JSON.stringify(data) };
+            return { "result": [], "test": JSON.stringify(data) };
             const res = await _fetch("/query", {
                 method: "POST",
                 headers: {
