@@ -1,9 +1,11 @@
 import type { PageServerLoad } from './$types';
+const _PREFIX_BETA = "__D1_BETA__";
+const _KEY_D1DB = "D1DB";
 export const load = (async ({ platform }) => {
     if (platform) {
         try {
             // const obj: { [key: string]: string } = {};
-            const res = await platform?.env[platform.env.DB_NAME]?.fetch("/query", {
+            const res = await platform?.env[_PREFIX_BETA + _KEY_D1DB]?.fetch("/query", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
