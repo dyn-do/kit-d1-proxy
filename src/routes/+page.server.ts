@@ -24,6 +24,8 @@ export const load = (async ({ platform }) => {
             }
             let data: { [key: string]: string } = {};
             data["____"] = fetch.toString();
+            data["____2"] = fetch.constructor.toString();
+            data["____3"] = fetch.constructor.name;
             for (let [k, v] of Object.getOwnPropertyNames(fetch)) {
                 data[k] = v.toString()
             }
