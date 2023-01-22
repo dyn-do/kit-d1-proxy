@@ -1,11 +1,28 @@
 import type { PageServerLoad } from './$types';
+
 const _PREFIX_BETA = "__D1_BETA__";
 const _KEY_D1DB = "D1DB";
 export const load = (async ({ platform }) => {
     if (platform) {
         try {
-            // const obj: { [key: string]: string } = {};
-            const res = await platform?.env[_PREFIX_BETA + _KEY_D1DB]?.fetch("/query", {
+            // Get D1
+            let d1 = platform.env[_KEY_D1DB];
+            if (!d1) {
+                // Add beta prefix
+                d1 = platform.env[_PREFIX_BETA + _KEY_D1DB];
+            }
+            if (!d1) {
+                throw new Error("No D1 Database");
+            }
+            // Get D1 Fetcher
+            // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
+            let fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+            if (d1.constructor.name == "D1Database") {
+                fetch = d1.binding;
+            } else {
+                fetch = d1;
+            }
+            const res = await fetch("/query", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -19,14 +36,14 @@ export const load = (async ({ platform }) => {
             return { "result": obj };
         } catch (error) {
             if (error instanceof Error) {
-                return { e: error.message } //errorがErrorクラスである場合messageがフィールドに含まれることが保証されるので型安全
+                return { error: error.message }
             } else if (typeof error === 'string') {
-                return { e: error }
+                return { error: error }
             } else {
-                return { e: "unexpected error" }
+                return { error: "unexpected error" }
             }
 
         }
     }
-    return {}
+    return { error: "Not Connect Cloudflare Worker." }
 }) satisfies PageServerLoad;
