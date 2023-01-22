@@ -23,10 +23,10 @@ export const load = (async ({ platform }) => {
                 fetch = d1;
             }
             let data: { [key: string]: string } = {};
+            data["____"] = fetch.toString();
             for (let [k, v] of Object.getOwnPropertyNames(fetch)) {
                 data[k] = v.toString()
             }
-            throw new Error(JSON.stringify(data));
             const res = await fetch("/query", {
                 method: "POST",
                 headers: {
@@ -38,7 +38,7 @@ export const load = (async ({ platform }) => {
                 })
             });
             const obj = await res.json();
-            return { "result": obj };
+            return { "result": obj, "test": JSON.stringify(data) };
         } catch (error) {
             if (error instanceof Error) {
                 return { error: error.message }
