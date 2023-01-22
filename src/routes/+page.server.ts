@@ -23,7 +23,7 @@ export const load = (async ({ platform }) => {
                 fetch = d1;
             }
             let data: { [key: string]: string } = {};
-            data["____"] = fetch.toString();
+            // data["____"] = fetch.toString();
             for (let [k, v] of Object.getOwnPropertyNames(fetch)) {
                 data[k] = v.toString()
             }
