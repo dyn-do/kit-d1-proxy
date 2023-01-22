@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import type { D1Response } from "../interfaces/D1Response";
     import { ErrorUtils } from "../utils/ErrorUtils";
     import { FetchD1 } from "../utils/FetchD1";
 
@@ -26,7 +27,12 @@
                 txtSql.value,
                 txtParams?.value || "[]"
             );
-            text = await res.text();
+            const d1 = (await res.json()) as D1Response;
+            if (d1.success) {
+                text = JSON.stringify(d1.results);
+            } else {
+                text = d1.error;
+            }
         } catch (error) {
             text = ErrorUtils.stackTrace(error);
         }
