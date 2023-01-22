@@ -122,7 +122,20 @@
     }
 </script>
 
-<h1>Cloudflare D1 Proxy Playground</h1>
+<h1>
+    Cloudflare D1 Proxy Playground
+    <a
+        href="https://github.com/dyn-do/kit-d1-proxy"
+        target="_blank"
+        rel="noreferrer"
+        ><img
+            src="/github-mark.png"
+            width="24px"
+            height="24px"
+            alt="github"
+        /></a
+    >
+</h1>
 
 <div>
     <span class="title">SQLite Command</span>
