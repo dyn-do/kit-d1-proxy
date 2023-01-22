@@ -15,14 +15,13 @@
         divResultExecute.textContent = JSON.stringify(data);
     });
 
-    const fetchD1 = new FetchD1(window);
-
     async function request(
         path: string,
         txtSql: HTMLTextAreaElement,
         output: HTMLDivElement,
         txtParams?: HTMLTextAreaElement
     ) {
+        const fetchD1 = new FetchD1(window);
         let text = "";
         try {
             const res = await fetchD1.postSql(
