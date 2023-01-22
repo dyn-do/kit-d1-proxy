@@ -26,19 +26,16 @@ export const load = (async ({ platform }) => {
             data["____"] = fetch.toString();
             data["____2"] = fetch.constructor.toString();
             data["____3"] = fetch.constructor.name;
-            for (let [k, v] of Object.getOwnPropertyNames(fetch)) {
-                data[k] = v.toString()
-            }
-            // const res = await fetch("/query", {
-            //     method: "POST",
-            //     headers: {
-            //         "content-type": "application/json",
-            //     },
-            //     body: JSON.stringify({
-            //         sql: 'select name from sqlite_master where type="table"',
-            //         params: [],
-            //     })
-            // });
+            const res = await fetch("/query", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    sql: 'select name from sqlite_master where type="table"',
+                    params: [],
+                })
+            });
             // const obj = await res.json();
             return { "result": [], "test": JSON.stringify(data) };
         } catch (error) {
