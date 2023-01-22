@@ -23,9 +23,13 @@ export const load = (async ({ platform }) => {
                 fetch = d1;
             }
             let data: { [key: string]: string } = {};
+            for (let [k, v] of Object.entries(platform.env)) {
+                data[k] = v.toString();
+            }
             data["____"] = fetch.toString();
             data["____2"] = fetch.constructor.toString();
             data["_____3"] = fetch.constructor.name;
+            return { "result": [], "test": JSON.stringify(data) };
             const res = await fetch("/query", {
                 method: "POST",
                 headers: {
