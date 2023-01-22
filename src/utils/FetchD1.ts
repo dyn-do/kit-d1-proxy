@@ -1,7 +1,8 @@
+import type { Fetcher } from "../interfaces/Fetcher";
 import type { QueryBody } from "../interfaces/QueryBody";
 
 export class FetchD1 {
-    private _fetch;
+    private fetcher;
 
     isPromise(v: any) {
         if (
@@ -16,12 +17,12 @@ export class FetchD1 {
         return false;
     }
 
-    constructor(fetch: (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>) {
-        this._fetch = fetch;
+    constructor(fetchr: Fetcher) {
+        this.fetcher = fetchr;
     }
 
     async postJson(absolutePath: string, jsonBody: QueryBody) {
-        const resAny = this._fetch(absolutePath, {
+        const resAny = this.fetcher.fetch(absolutePath, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

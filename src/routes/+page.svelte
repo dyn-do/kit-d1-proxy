@@ -15,7 +15,7 @@
         divResultExecute.textContent = JSON.stringify(data);
     });
 
-    const fetchD1 = new FetchD1(fetch);
+    const fetchD1 = new FetchD1(window);
 
     async function request(
         path: string,

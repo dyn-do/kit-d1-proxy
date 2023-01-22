@@ -1,4 +1,5 @@
 import { D1Constants } from "../constants/D1Constants";
+import type { Fetcher } from "../interfaces/Fetcher";
 import type { QueryBody } from "../interfaces/QueryBody";
 import { FetchD1 } from "../utils/FetchD1";
 export class D1Service {
@@ -9,8 +10,8 @@ export class D1Service {
         this._platform = platform;
     }
 
-    private _getFetch(): (input: RequestInfo | URL, init?: RequestInit) => Promise<Response> {
-        let d1Fetch: (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>;
+    private _getFetch() {
+        let fetcher: Fetcher;
         // Get D1
         let d1 = this._platform.env[D1Constants.KEY_D1DB];
         if (!d1) {
@@ -23,11 +24,11 @@ export class D1Service {
         // Get D1 Fetcher
         // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
         if (d1.constructor.name == "D1Database") {
-            d1Fetch = d1.binding.fetch;
+            fetcher = d1.binding;
         } else {
-            d1Fetch = d1.fetch;
+            fetcher = d1;
         }
-        return d1Fetch;
+        return fetcher;
     }
 
     async fetch(path: string, body: QueryBody) {
