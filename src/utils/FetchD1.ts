@@ -33,4 +33,19 @@ export class FetchD1 {
         };
         return await this.postJson(absolutePath, body);
     }
+
+    async downloadBinary(absolutePath: string) {
+        const requestInit: RequestInit = {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+        };
+
+        if (this.output) {
+            this.output(`${absolutePath} ${JSON.stringify(requestInit)}`);
+        }
+
+        return await this.fetcher.fetch(absolutePath, requestInit);
+    }
 }

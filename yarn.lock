@@ -587,6 +587,7 @@ __metadata:
     "@sveltejs/adapter-auto": ^1.0.2
     "@sveltejs/adapter-cloudflare": ^1.1.0
     "@sveltejs/kit": ^1.2.2
+    js-file-download: ^0.4.12
     sass: ^1.57.1
     svelte: ^3.55.1
     svelte-check: ^3.0.2
@@ -1100,6 +1101,13 @@ __metadata:
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
   checksum: 26bf6c5480dda5161c820c5b5c751ae1e766c587b1f951ea3fcfc973bafb7831ae5b54a31a69bd670220e42e99ec154475025a468eae58ea262f813fdc8d1c62
+  languageName: node
+  linkType: hard
+
+"js-file-download@npm:^0.4.12":
+  version: 0.4.12
+  resolution: "js-file-download@npm:0.4.12"
+  checksum: a03847eef0184fbf34a7b7fd365ea6aa1a6cc142efeac52c4baa0cdde845dc93718eb66808dfcffd6c91b37ddc9d058d352ac9698b4280744bad3587240c93b6
   languageName: node
   linkType: hard
 

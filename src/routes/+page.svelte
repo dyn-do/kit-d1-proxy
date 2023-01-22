@@ -2,8 +2,8 @@
     import { onMount } from "svelte";
     import { Command, CommandName } from "../enums/Mode";
     import type { D1Response } from "../interfaces/D1Response";
-    import { ErrorUtils } from "../utils/ErrorUtils";
     import { FetchD1 } from "../utils/FetchD1";
+    import fileDownload from "js-file-download";
 
     let txtSql: HTMLTextAreaElement;
     let txtParams: HTMLTextAreaElement;
@@ -48,14 +48,8 @@
         },
     ];
 
-    onMount(() => {});
-
     async function request() {
-        const fetchD1 = new FetchD1(window);
-        spanRequest.textContent = "";
-        fetchD1.output = (e) => {
-            spanRequest.textContent = e;
-        };
+        const fetchD1 = initFetch();
         const sql = txtSql.value;
         const paramsStr =
             rdiCommand == Command.QUERY && txtParams.value
@@ -86,6 +80,35 @@
             result = " " + error;
         }
         spanResult.innerText = result;
+    }
+
+    async function dump() {
+        const fetchD1 = initFetch();
+        try {
+            const res = await fetchD1.downloadBinary(
+                "/" + CommandName[Command.DUMP]
+            );
+            if (res.ok) {
+                // Download
+                const binary = await res.arrayBuffer();
+                fileDownload(binary, "dump.db");
+            } else {
+                // Server Error
+                const message = await res.text();
+                spanResult.innerText = message;
+            }
+        } catch (error) {
+            spanResult.innerText = " " + error;
+        }
+    }
+
+    function initFetch() {
+        spanRequest.textContent = "";
+        const fetchD1 = new FetchD1(window);
+        fetchD1.output = (e) => {
+            spanRequest.textContent = e;
+        };
+        return fetchD1;
     }
 
     async function setExample(
@@ -148,6 +171,7 @@
     </div>
 </div>
 <button bind:this={btnQuery} on:click={() => request()}> run </button>
+<button on:click={dump}> dump </button>
 
 <div>
     <span class="title">Request: </span><span bind:this={spanRequest} />

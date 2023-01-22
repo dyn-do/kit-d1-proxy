@@ -20,5 +20,8 @@
 		"typescript": "^4.9.4",
 		"vite": "^4.0.4"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"js-file-download": "^0.4.12"
+	}
 }
