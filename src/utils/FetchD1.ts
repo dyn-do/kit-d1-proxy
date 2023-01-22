@@ -23,7 +23,7 @@ export class FetchD1 {
     async postJson(absolutePath: string, jsonBody: QueryBody) {
         let data: { [key: string]: string } = {};
         data["a"] = this._fetch.constructor.name;
-        data["b"] = this._fetch.constructor.name;
+        data["b"] = this._fetch.toString();
         for (let [k, v] of Object.getOwnPropertyNames(this._fetch)) {
             data[k] = v.toString()
         }
