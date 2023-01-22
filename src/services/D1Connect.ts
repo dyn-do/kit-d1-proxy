@@ -23,9 +23,9 @@ export class D1Service {
         // Get D1 Fetcher
         // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
         if (d1.constructor.name == "D1Database") {
-            d1Fetch = d1.binding;
+            d1Fetch = d1.binding.fetch;
         } else {
-            d1Fetch = d1;
+            d1Fetch = d1.fetch;
         }
         return d1Fetch;
     }

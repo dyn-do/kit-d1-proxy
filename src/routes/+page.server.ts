@@ -18,9 +18,9 @@ export const load = (async ({ platform }) => {
             // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
             let _fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
             if (d1.constructor.name == "D1Database") {
-                _fetch = d1.binding;
+                _fetch = d1.binding.fetch;
             } else {
-                _fetch = d1;
+                _fetch = d1.fetch;
             }
             let data: { [key: string]: string } = {};
             for (let [k, v] of Object.entries(Object.getPrototypeOf(_fetch))) {
@@ -29,7 +29,7 @@ export const load = (async ({ platform }) => {
             data["____"] = typeof _fetch;
             data["____2"] = _fetch.constructor.toString();
             data["_____3"] = _fetch.constructor.name;
-            return { "result": [], "test": JSON.stringify(data) };
+            // return { "result": [], "test": JSON.stringify(data) };
             const res = await _fetch("/query", {
                 method: "POST",
                 headers: {
