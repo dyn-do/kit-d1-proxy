@@ -42,7 +42,7 @@ export const load = (async ({ platform }) => {
                 })
             });
             const obj = await res.json();
-            return { "result": obj, "test": JSON.stringify(data) };
+            return { "result": obj.toString(), "test": JSON.stringify(data) };
         } catch (error) {
             if (error instanceof Error) {
                 return { error: JSON.stringify(error, Object.getOwnPropertyNames(error)) }
