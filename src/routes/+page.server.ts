@@ -23,10 +23,11 @@ export const load = (async ({ platform }) => {
                 _fetch = d1;
             }
             let data: { [key: string]: string } = {};
-            for (let [k, v] of Object.entries(platform.env)) {
+            for (let [k, v] of Object.entries(_fetch)) {
                 data[k] = v.toString();
             }
             data["____"] = typeof _fetch;
+            data["____0"] = _fetch.length.toString();
             data["____2"] = _fetch.constructor.toString();
             data["_____3"] = _fetch.constructor.name;
             return { "result": [], "test": JSON.stringify(data) };
