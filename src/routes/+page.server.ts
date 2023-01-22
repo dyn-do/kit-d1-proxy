@@ -23,22 +23,22 @@ export const load = (async ({ platform }) => {
                 fetch = d1;
             }
             let data: { [key: string]: string } = {};
-            // data["____"] = fetch.toString();
+            data["____"] = fetch.toString();
             for (let [k, v] of Object.getOwnPropertyNames(fetch)) {
                 data[k] = v.toString()
             }
-            const res = await fetch("/query", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    sql: 'select name from sqlite_master where type="table"',
-                    params: [],
-                })
-            });
-            const obj = await res.json();
-            return { "result": obj, "test": JSON.stringify(data) };
+            // const res = await fetch("/query", {
+            //     method: "POST",
+            //     headers: {
+            //         "content-type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         sql: 'select name from sqlite_master where type="table"',
+            //         params: [],
+            //     })
+            // });
+            // const obj = await res.json();
+            return { "result": [], "test": JSON.stringify(data) };
         } catch (error) {
             if (error instanceof Error) {
                 return { error: JSON.stringify(error, Object.getOwnPropertyNames(error)) }
