@@ -10,7 +10,6 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		outDir: "/.svelte-kit/cloudflare2",
 	}
 };
 
