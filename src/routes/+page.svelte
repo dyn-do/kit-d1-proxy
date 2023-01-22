@@ -12,7 +12,7 @@
 
     export let data: PageData;
     onMount(() => {
-        console.log(data);
+        divResultExecute.textContent = JSON.stringify(data);
     });
 
     const fetchD1 = new FetchD1(fetch);
