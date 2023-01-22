@@ -15,9 +15,10 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
 
             res = new Response(JSON.stringify(obj));
         }
+    } else {
+        res = new Response("No Cloudflare Worker");
     }
 
-    res = new Response("No Cloudflare Worker");
     // CORS 
     res.headers.append('Access-Control-Allow-Origin', "*");
 
