@@ -31,6 +31,7 @@ export class D1Service {
     }
 
     async fetch(path: string, body: QueryBody) {
+        return { error: this._getFetch().toString() }
         try {
             const fetchD1 = new FetchD1(this._getFetch());
             const res = await fetchD1.postJson(path, body);
