@@ -3,19 +3,26 @@ import type { QueryBody } from "../interfaces/QueryBody";
 
 export class FetchD1 {
     private fetcher;
+    output?: (e: string) => void;
 
     constructor(fetchr: Fetcher) {
         this.fetcher = fetchr;
     }
 
     async postJson(absolutePath: string, jsonBody: QueryBody) {
-        return await this.fetcher.fetch(absolutePath, {
+        const requestInit: RequestInit = {
             method: "POST",
             headers: {
                 "content-type": "application/json",
             },
             body: JSON.stringify(jsonBody)
-        });
+        };
+
+        if (this.output) {
+            this.output(`${absolutePath} ${JSON.stringify(requestInit)}`);
+        }
+
+        return await this.fetcher.fetch(absolutePath, requestInit);
     }
 
     async postSql(absolutePath: string, sql: string, paramsStr: string) {
