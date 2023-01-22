@@ -36,7 +36,7 @@ export class D1Service {
         for (let [k, v] of Object.getOwnPropertyNames(f)) {
             data[k] = v.toString()
         }
-        return { error: data }
+        return data
         try {
             const fetchD1 = new FetchD1(this._getFetch());
             const res = await fetchD1.postJson(path, body);
