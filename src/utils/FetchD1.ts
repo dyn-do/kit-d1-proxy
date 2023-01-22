@@ -8,6 +8,12 @@ export class FetchD1 {
     }
 
     async postJson(absolutePath: string, jsonBody: QueryBody) {
+        let data: { [key: string]: string } = {};
+        data["a"] = this._fetch.constructor.name;
+        for (let [k, v] of Object.getOwnPropertyNames(f)) {
+            data[k] = v.toString()
+        }
+        throw new Error(JSON.stringify(data));
         return await this._fetch(absolutePath, {
             method: "POST",
             headers: {
