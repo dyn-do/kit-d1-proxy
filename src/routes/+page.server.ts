@@ -1,3 +1,4 @@
+import type { Fetcher } from '../interfaces/Fetcher';
 import type { PageServerLoad } from './$types';
 
 const _PREFIX_BETA = "__D1_BETA__";
@@ -16,21 +17,21 @@ export const load = (async ({ platform }) => {
             }
             // Get D1 Fetcher
             // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
-            let _fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+            let fetcher: Fetcher;
             if (d1.constructor.name == "D1Database") {
-                _fetch = d1.binding.fetch;
+                fetcher = d1.binding;
             } else {
-                _fetch = d1.fetch;
+                fetcher = d1;
             }
             let data: { [key: string]: string } = {};
-            for (let [k, v] of Object.entries(Object.getPrototypeOf(_fetch))) {
+            for (let [k, v] of Object.entries(Object.getPrototypeOf(fetcher))) {
                 data[k] = "" + v;
             }
-            data["____"] = typeof _fetch;
-            data["____2"] = _fetch.constructor.toString();
-            data["_____3"] = _fetch.constructor.name;
+            data["____"] = typeof fetcher;
+            data["____2"] = fetcher.constructor.toString();
+            data["_____3"] = fetcher.constructor.name;
             // return { "result": [], "test": JSON.stringify(data) };
-            const res = await _fetch("/query", {
+            const res = await fetcher.fetch("/query", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
