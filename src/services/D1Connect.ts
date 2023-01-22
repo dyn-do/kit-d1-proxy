@@ -10,7 +10,7 @@ export class D1Service {
     }
 
     private _getFetch(): (input: RequestInfo | URL, init?: RequestInit) => Promise<Response> {
-        let d1Fetch = fetch;
+        let d1Fetch: (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>;
         // Get D1
         let d1 = this._platform.env[D1Constants.KEY_D1DB];
         if (!d1) {

@@ -16,21 +16,21 @@ export const load = (async ({ platform }) => {
             }
             // Get D1 Fetcher
             // ref: https://github.com/cloudflare/wrangler2/issues/2335#issuecomment-1352344893
-            let fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+            let _fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
             if (d1.constructor.name == "D1Database") {
-                fetch = d1.binding;
+                _fetch = d1.binding;
             } else {
-                fetch = d1;
+                _fetch = d1;
             }
             let data: { [key: string]: string } = {};
             for (let [k, v] of Object.entries(platform.env)) {
                 data[k] = v.toString();
             }
-            data["____"] = fetch.toString();
-            data["____2"] = fetch.constructor.toString();
-            data["_____3"] = fetch.constructor.name;
+            data["____"] = _fetch.toString();
+            data["____2"] = _fetch.constructor.toString();
+            data["_____3"] = _fetch.constructor.name;
             // return { "result": [], "test": JSON.stringify(data) };
-            const res = await fetch("/query", {
+            const res = await _fetch("/query", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
