@@ -27,7 +27,6 @@ export const load = (async ({ platform }) => {
                 data[k] = "" + v;
             }
             data["____"] = typeof _fetch;
-            data["____0"] = _fetch.length.toString();
             data["____2"] = _fetch.constructor.toString();
             data["_____3"] = _fetch.constructor.name;
             return { "result": [], "test": JSON.stringify(data) };
