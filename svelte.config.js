@@ -9,7 +9,8 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		outDir: "/.svelte-kit/cloudflare2",
 	}
 };
 
