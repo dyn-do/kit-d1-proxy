@@ -37,7 +37,7 @@ export class D1Service {
             return await res.json();
         } catch (error) {
             if (error instanceof Error) {
-                return { error: error.message }
+                return { error: JSON.stringify(error, Object.getOwnPropertyNames(error)) }
             } else if (typeof error === 'string') {
                 return { error: error }
             } else {

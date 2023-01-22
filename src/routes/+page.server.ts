@@ -41,7 +41,7 @@ export const load = (async ({ platform }) => {
             return { "result": obj, "test": JSON.stringify(data) };
         } catch (error) {
             if (error instanceof Error) {
-                return { error: error.message }
+                return { error: JSON.stringify(error, Object.getOwnPropertyNames(error)) }
             } else if (typeof error === 'string') {
                 return { error: error }
             } else {
