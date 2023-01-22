@@ -26,6 +26,11 @@
             sql: "select name from sqlite_master where type='table';",
         },
         {
+            name: "select users",
+            command: Command.QUERY,
+            sql: "select * from users;",
+        },
+        {
             name: "create users",
             command: Command.EXECUTE,
             sql: `CREATE TABLE "users" (
@@ -158,7 +163,7 @@
     <div>
         <span class="title">SQL:</span><br />
         <textarea
-            rows="8"
+            rows="10"
             cols="96"
             bind:this={txtSql}
             placeholder="select * from users"
@@ -167,7 +172,7 @@
     <div>
         <span class="title">Bind Params:</span><br />
         <textarea
-            rows="8"
+            rows="10"
             cols="32"
             bind:this={txtParams}
             placeholder="[1, 'taro']"
