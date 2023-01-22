@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { ErrorUtils } from "../utils/ErrorUtils";
     import { FetchD1 } from "../utils/FetchD1";
-    import type { PageData } from "./$types";
 
     let txtQuery: HTMLTextAreaElement;
     let txtQueryParam: HTMLTextAreaElement;
@@ -10,10 +10,7 @@
     let txtExecute: HTMLTextAreaElement;
     let divResultExecute: HTMLDivElement;
 
-    export let data: PageData;
-    onMount(() => {
-        divResultExecute.textContent = JSON.stringify(data);
-    });
+    onMount(() => {});
 
     async function request(
         path: string,
@@ -31,12 +28,7 @@
             );
             text = await res.text();
         } catch (error) {
-            console.error(error);
-            if (error instanceof Error) {
-                text = error.message;
-            } else if (typeof error === "string") {
-                text = error;
-            }
+            text = ErrorUtils.stackTrace(error);
         }
         output.innerText = text;
     }

@@ -1,6 +1,7 @@
 import { D1Constants } from "../constants/D1Constants";
 import type { Fetcher } from "../interfaces/Fetcher";
 import type { QueryBody } from "../interfaces/QueryBody";
+import { ErrorUtils } from "../utils/ErrorUtils";
 import { FetchD1 } from "../utils/FetchD1";
 export class D1Service {
 
@@ -37,13 +38,7 @@ export class D1Service {
             const res = await fetchD1.postJson(path, body);
             return await res.json();
         } catch (error) {
-            if (error instanceof Error) {
-                return { error: JSON.stringify(error, Object.getOwnPropertyNames(error)) }
-            } else if (typeof error === 'string') {
-                return { error: error }
-            } else {
-                return { error: "unexpected error" }
-            }
+            return { error: ErrorUtils.stackTrace(error) };
         }
     }
 }
