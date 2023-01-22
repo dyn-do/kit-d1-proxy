@@ -148,7 +148,7 @@
             rows="8"
             cols="96"
             bind:this={txtSql}
-            placeholder="select * from user"
+            placeholder="select * from users"
         />
     </div>
     <div>
@@ -166,7 +166,7 @@
         {#each examples as { name, command, sql, paramsStr }}
             <button on:click={() => setExample(command, sql, paramsStr)}
                 >{name}</button
-            >
+            ><br />
         {/each}
     </div>
 </div>
