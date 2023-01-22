@@ -10,6 +10,11 @@
     let txtExecute: HTMLTextAreaElement;
     let divResultExecute: HTMLDivElement;
 
+    export let data: PageData;
+    onMount(() => {
+        console.log(data);
+    });
+
     const fetchD1 = new FetchD1(fetch);
 
     async function request(
