@@ -33,6 +33,7 @@ export class D1Service {
     async fetch(path: string, body: QueryBody) {
         let data: { [key: string]: string } = {};
         const f = this._getFetch();
+        data["a"] = f.constructor.name;
         for (let [k, v] of Object.getOwnPropertyNames(f)) {
             data[k] = v.toString()
         }
