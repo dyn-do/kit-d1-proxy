@@ -29,7 +29,7 @@ export const load = (async ({ platform }) => {
             data["____"] = fetch.toString();
             data["____2"] = fetch.constructor.toString();
             data["_____3"] = fetch.constructor.name;
-            return { "result": [], "test": JSON.stringify(data) };
+            // return { "result": [], "test": JSON.stringify(data) };
             const res = await fetch("/query", {
                 method: "POST",
                 headers: {
