@@ -4,14 +4,25 @@ import { D1Service as D1Connect } from "../../services/D1Connect";
 export const POST: RequestHandler = async ({ request, params, platform }) => {
     const path = params["path"];
     if (platform && path) {
+        let res: Response
+        if (path == "dump") {
+            // download SQLite
+            const connect = new D1Connect(platform);
+            const binary = await connect.downloadBinary(path);
 
-        const json = await request.json();
+            res = new Response(binary);
 
-        // run d1 call;
-        const connect = new D1Connect(platform);
-        const obj = await connect.fetch(path, json);
+        } else {
 
-        let res = new Response(JSON.stringify(obj));
+
+            const json = await request.json();
+
+            // run d1 call;
+            const connect = new D1Connect(platform);
+            const obj = await connect.fetchJson(path, json);
+
+            res = new Response(JSON.stringify(obj));
+        }
         // CORS 
         res.headers.append('Access-Control-Allow-Origin', "*");
         return res;
