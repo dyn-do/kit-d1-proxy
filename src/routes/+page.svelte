@@ -39,7 +39,7 @@
             name: "insert user",
             command: Command.QUERY,
             sql: `insert into users(name, age) values(?,?);`,
-            paramsStr: "['taro', 20]",
+            paramsStr: '["taro", 20]',
         },
         {
             name: "drop users",
