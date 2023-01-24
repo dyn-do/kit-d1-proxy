@@ -14,7 +14,7 @@ export class FetchD1 {
         };
 
         if (this.output) {
-            this.output(`${absolutePath} ${JSON.stringify(requestInit)}`);
+            this.output(`${document.URL}${absolutePath} ${JSON.stringify(requestInit)}`);
         }
 
         return await fetch(absolutePath, requestInit);
