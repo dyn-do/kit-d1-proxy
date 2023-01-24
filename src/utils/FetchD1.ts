@@ -9,15 +9,15 @@ export class FetchD1 {
         this.fetcher = fetchr;
     }
     async post(absolutePath: string, req: Request) {
-        const body = await req.text()
-        const requestInit: RequestInit = {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: "{}"
-        };
-        return await this.fetcher.fetch(absolutePath, requestInit);
+        // const body = await req.text()
+        // const requestInit: RequestInit = {
+        //     method: "POST",
+        //     headers: {
+        //         "content-type": "application/json",
+        //     },
+        //     body: "{}"
+        // };
+        return await this.fetcher.fetch(absolutePath, req);
     }
 
     async postJson(absolutePath: string, jsonBody: QueryBody) {
