@@ -1,5 +1,5 @@
 import { error, type RequestHandler } from "@sveltejs/kit";
-import { D1Service as D1Connect } from "../../services/D1Connect";
+import { D1Service as D1ConnectService } from "../../services/D1Connect";
 import { ErrorUtils } from "../../utils/ErrorUtils";
 
 export const POST: RequestHandler = async ({ request, params, platform }) => {
@@ -9,8 +9,8 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
         try {
 
             // run d1 call;
-            const connect = new D1Connect(platform);
-            const d1res = await connect.fetch(path, request);
+            const conn = new D1ConnectService(platform);
+            const d1res = await conn.fetch(path, request);
             const res = new Response(await d1res.text());
             // CORS 
             res.headers.append('Access-Control-Allow-Origin', "*");

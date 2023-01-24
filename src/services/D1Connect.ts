@@ -33,19 +33,6 @@ export class D1Service {
     }
 
     async fetch(path: string, request: Request) {
-        const fetchD1 = new FetchD1(this._getFetch());
-        return await fetchD1.post(path, request);
-    }
-
-    async fetchJson(path: string, body: QueryBody) {
-        const fetchD1 = new FetchD1(this._getFetch());
-        const res = await fetchD1.postJson(path, body);
-        return await res.json();
-    }
-
-    async downloadBinary(path: string) {
-        const fetchD1 = new FetchD1(this._getFetch());
-        const res = await fetchD1.downloadBinary(path);
-        return await res.arrayBuffer();
+        return await this._getFetch().fetch(path, request);
     }
 }

@@ -90,9 +90,7 @@
     async function dump() {
         const fetchD1 = initFetch();
         try {
-            const res = await fetchD1.downloadBinary(
-                "/" + CommandName[Command.DUMP]
-            );
+            const res = await fetchD1.postJson("/" + CommandName[Command.DUMP]);
             if (res.ok) {
                 // Download
                 const binary = await res.arrayBuffer();
@@ -109,7 +107,7 @@
 
     function initFetch() {
         spanRequest.textContent = "";
-        const fetchD1 = new FetchD1(window);
+        const fetchD1 = new FetchD1();
         fetchD1.output = (e) => {
             spanRequest.textContent = e;
         };
