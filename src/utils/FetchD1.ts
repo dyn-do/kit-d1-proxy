@@ -15,7 +15,7 @@ export class FetchD1 {
             headers: {
                 "content-type": "application/json",
             },
-            body: body
+            body: "{}"
         };
         return await this.fetcher.fetch(absolutePath, requestInit);
     }
