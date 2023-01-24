@@ -1,31 +1,42 @@
-import type { Fetcher } from "../interfaces/Fetcher";
 import type { QueryBody } from "../interfaces/QueryBody";
 
-export class FetchD1 {
-    output?: (e: string) => void;
+export class FetchD1Utils {
 
-    async postJson(absolutePath: string, jsonBody?: QueryBody) {
+    static async postJson(absolutePath: string, jsonBody?: QueryBody) {
+        const requestInit = this.buildRequest(jsonBody);
+        return await fetch(absolutePath, requestInit);
+    }
+
+    static async postSql(absolutePath: string, sql: string, paramsStr?: string) {
+        const requestInit = this.buildSqlRequest(sql, paramsStr);
+        return await fetch(absolutePath, requestInit);
+    }
+
+    static buildRequest(jsonBody?: QueryBody) {
         const requestInit: RequestInit = {
             method: "POST",
             headers: {
                 "content-type": "application/json",
             },
+            mode: 'cors',
             body: jsonBody ? JSON.stringify(jsonBody) : undefined
         };
-
-        if (this.output) {
-            this.output(`${document.URL}${absolutePath} ${JSON.stringify(requestInit)}`);
-        }
-
-        return await fetch(absolutePath, requestInit);
+        return requestInit;
     }
 
-    async postSql(absolutePath: string, sql: string, paramsStr: string) {
-        let params = JSON.parse(paramsStr) as Array<string | number>;
+    static buildSqlRequest(sql: string, paramsStr?: string) {
+        let params: Array<string | number> | undefined = [];
+        if (paramsStr) {
+            try {
+                params = JSON.parse(paramsStr);
+            } catch (e) {
+                params = undefined;
+            }
+        }
         const body: QueryBody = {
             sql: sql,
             params
         };
-        return await this.postJson(absolutePath, body);
+        return this.buildRequest(body);
     }
 }

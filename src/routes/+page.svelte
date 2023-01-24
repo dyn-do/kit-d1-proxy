@@ -2,14 +2,15 @@
     import { onMount } from "svelte";
     import { Command, CommandName } from "../enums/Mode";
     import type { D1Response } from "../interfaces/D1Response";
-    import { FetchD1 } from "../utils/FetchD1";
+    import { FetchD1Utils } from "../utils/FetchD1";
     import fileDownload from "js-file-download";
+    import urljoin from "url-join";
 
     let txtSql: HTMLTextAreaElement;
     let txtParams: HTMLTextAreaElement;
     let btnQuery: HTMLButtonElement;
-    let spanRequest: HTMLSpanElement;
-    let spanResult: HTMLSpanElement;
+    let txtFetch: HTMLTextAreaElement;
+    let txtResult: HTMLTextAreaElement;
 
     let rdiCommand: Command = Command.QUERY;
     interface Example {
@@ -54,7 +55,6 @@
     ];
 
     async function request() {
-        const fetchD1 = initFetch();
         const sql = txtSql.value;
         const paramsStr =
             rdiCommand == Command.QUERY && txtParams.value
@@ -62,7 +62,7 @@
                 : "[]";
         let result = "";
         try {
-            const res = await fetchD1.postSql(
+            const res = await FetchD1Utils.postSql(
                 "/" + CommandName[rdiCommand],
                 sql,
                 paramsStr
@@ -84,13 +84,15 @@
         } catch (error) {
             result = " " + error;
         }
-        spanResult.innerText = result;
+        txtResult.value = result;
     }
 
     async function dump() {
-        const fetchD1 = initFetch();
         try {
-            const res = await fetchD1.postJson("/" + CommandName[Command.DUMP]);
+            txtResult.value = "";
+            const res = await FetchD1Utils.postJson(
+                "/" + CommandName[Command.DUMP]
+            );
             if (res.ok) {
                 // Download
                 const binary = await res.arrayBuffer();
@@ -98,20 +100,11 @@
             } else {
                 // Server Error
                 const message = await res.text();
-                spanResult.innerText = message;
+                txtResult.value = message;
             }
         } catch (error) {
-            spanResult.innerText = " " + error;
+            txtResult.value = " " + error;
         }
-    }
-
-    function initFetch() {
-        spanRequest.textContent = "";
-        const fetchD1 = new FetchD1();
-        fetchD1.output = (e) => {
-            spanRequest.textContent = e;
-        };
-        return fetchD1;
     }
 
     async function setExample(
@@ -122,6 +115,21 @@
         rdiCommand = command;
         txtSql.value = sql;
         txtParams.value = paramsStr ?? "";
+        onChangeSql();
+    }
+
+    function onChangeSql() {
+        txtFetch.value = `fetch("${urljoin(
+            document.URL,
+            CommandName[rdiCommand]
+        )}", ${JSON.stringify(
+            FetchD1Utils.buildSqlRequest(
+                txtSql.value,
+                rdiCommand == Command.QUERY ? txtParams.value : undefined
+            ),
+            null,
+            4
+        )})`;
     }
 </script>
 
@@ -146,6 +154,7 @@
         ><input
             type="radio"
             bind:group={rdiCommand}
+            on:input={onChangeSql}
             value={Command.QUERY}
         />{CommandName[Command.QUERY]}
     </label>
@@ -153,17 +162,19 @@
         ><input
             type="radio"
             bind:group={rdiCommand}
+            on:input={onChangeSql}
             value={Command.EXECUTE}
         />{CommandName[Command.EXECUTE]}
     </label>
 </div>
-<div class="sql">
+<div class="area">
     <div>
         <span class="title">SQL:</span><br />
         <textarea
             rows="10"
             cols="96"
             bind:this={txtSql}
+            on:input={onChangeSql}
             placeholder="select * from users"
         />
     </div>
@@ -173,9 +184,16 @@
             rows="10"
             cols="32"
             bind:this={txtParams}
-            placeholder="[1, 'taro']"
+            on:input={onChangeSql}
+            placeholder={'[1, "taro"]'}
             disabled={rdiCommand == Command.EXECUTE}
         />
+    </div>
+</div>
+<div class="area">
+    <div>
+        <span class="title">fetch: </span><br />
+        <textarea rows="10" cols="96" bind:this={txtFetch} readonly />
     </div>
     <div>
         <span class="title">Example:</span><br />
@@ -189,18 +207,18 @@
 <button bind:this={btnQuery} on:click={() => request()}> run </button>
 <button on:click={dump}> dump </button>
 
-<div>
-    <span class="title">Request: </span><span bind:this={spanRequest} />
-</div>
-<div>
-    <span class="title">Result: </span><span bind:this={spanResult} />
+<div class="area">
+    <div>
+        <span class="title">Result: </span><br />
+        <textarea rows="10" cols="96" bind:this={txtResult} />
+    </div>
 </div>
 
 <style lang="scss">
     .title {
         font-weight: bold;
     }
-    .sql {
+    .area {
         display: flex;
     }
 </style>

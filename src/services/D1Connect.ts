@@ -2,7 +2,7 @@ import { D1Constants } from "../constants/D1Constants";
 import type { Fetcher } from "../interfaces/Fetcher";
 import type { QueryBody } from "../interfaces/QueryBody";
 import { ErrorUtils } from "../utils/ErrorUtils";
-import { FetchD1 } from "../utils/FetchD1";
+import { FetchD1Utils } from "../utils/FetchD1";
 export class D1Service {
 
     private _platform: App.Platform;

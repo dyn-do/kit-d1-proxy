@@ -22,6 +22,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"js-file-download": "^0.4.12"
+		"js-file-download": "^0.4.12",
+		"url-join": "^5.0.0"
 	}
 }
