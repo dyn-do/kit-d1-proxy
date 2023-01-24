@@ -8,8 +8,13 @@ export class FetchD1 {
     constructor(fetchr: Fetcher) {
         this.fetcher = fetchr;
     }
-    async post(absolutePath: string, request: Request) {
-        return await this.fetcher.fetch(absolutePath, request);
+    async post(absolutePath: string, req: Request) {
+        const requestInit: RequestInit = {
+            method: req.method,
+            headers: req.headers,
+            body: req.body
+        };
+        return await this.fetcher.fetch(absolutePath, requestInit);
     }
 
     async postJson(absolutePath: string, jsonBody: QueryBody) {
