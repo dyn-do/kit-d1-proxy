@@ -54,6 +54,10 @@
         },
     ];
 
+    onMount(() => {
+        onChangeSql();
+    });
+
     async function request() {
         const sql = txtSql.value;
         const paramsStr =
@@ -193,7 +197,13 @@
 <div class="area">
     <div>
         <span class="title">fetch: </span><br />
-        <textarea rows="10" cols="96" bind:this={txtFetch} readonly />
+        <textarea
+            class="fetch"
+            rows="10"
+            cols="96"
+            bind:this={txtFetch}
+            readonly
+        />
     </div>
     <div>
         <span class="title">Example:</span><br />
@@ -215,6 +225,9 @@
 </div>
 
 <style lang="scss">
+    .fetch {
+        background-color: #ffc;
+    }
     .title {
         font-weight: bold;
     }
