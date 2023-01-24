@@ -10,7 +10,7 @@ export class FetchD1 {
     }
     async post(absolutePath: string, req: Request) {
         const requestInit: RequestInit = {
-            method: req.method,
+            method: "POST",
             headers: {
                 "content-type": "application/json",
             },
