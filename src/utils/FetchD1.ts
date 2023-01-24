@@ -11,7 +11,7 @@ export class FetchD1 {
     async post(absolutePath: string, req: Request) {
         const requestInit: RequestInit = {
             method: req.method,
-            headers: req.headers,
+            headers: Object.assign({}, req.headers),
             body: req.body
         };
         return await this.fetcher.fetch(absolutePath, requestInit);
