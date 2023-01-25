@@ -8,7 +8,6 @@
 
     let txtSql: HTMLTextAreaElement;
     let txtParams: HTMLTextAreaElement;
-    let btnQuery: HTMLButtonElement;
     let txtFetch: HTMLTextAreaElement;
     let txtResult: HTMLTextAreaElement;
 
@@ -214,7 +213,7 @@
         {/each}
     </div>
 </div>
-<button bind:this={btnQuery} on:click={() => request()}> run </button>
+<button on:click={() => request()}> run </button>
 <button on:click={dump}> dump </button>
 
 <div class="area">
