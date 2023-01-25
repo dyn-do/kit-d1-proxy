@@ -1,12 +1,13 @@
 # kit-d1-proxy
 [日本語](./README.ja.md)  
 
-This project will build a web API that allows you to read and write to Cloudflare D1's DB from a browser.
+This project will build a web API that allows you to read and write to Cloudflare D1's DB from a browser.  
 DEMO: [Cloudflare D1 Proxy Playground](https://kit-d1-proxy.pages.dev/)
 
 D1 is a cloud RDB service provided by Cloudflare that uses SQLite.  
 As of January 25, 2023, it is currently in open alpha and is **completely free**.  
-With this project, you can build your own D1 API with just screen operations. Let's make the most of Cloudflare D1 😆
+With this project, you can build your own D1 API with just screen operations.  
+Let's make the most of Cloudflare D1 😆
 
 > **Warning**  
 > Because it is open alpha, there is a possibility that it may become unavailable due to sudden changes in specifications.  
@@ -29,7 +30,7 @@ With this project, you can build your own D1 API with just screen operations. Le
     |--|--|
     |`NODE_VERSION` | 16|
 
-    **FFunctions > D1 Database Binding**
+    **Functions > D1 Database Binding**
     |Variable Name|Value|
     |--|--|
     |`D1DB`|Database created in step 2|
