@@ -11,7 +11,6 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
             // run d1 call;
             const conn = new D1ConnectService(platform);
             const d1res = await conn.fetch(path, request);
-            //const res = new Response(await d1res.text());
             const res = new Response(d1res.body);
             // CORS 
             res.headers.append('Access-Control-Allow-Origin', "*");
