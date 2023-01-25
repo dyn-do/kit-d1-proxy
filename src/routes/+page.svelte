@@ -195,14 +195,11 @@
 </div>
 <div class="area">
     <div>
-        <span class="title">fetch: </span><br />
-        <textarea
-            class="fetch"
-            rows="10"
-            cols="96"
-            bind:this={txtFetch}
-            readonly
-        />
+        <span class="title">fetch: </span><button
+            on:click={() => navigator.clipboard.writeText(txtFetch.value)}
+            >copy</button
+        ><br />
+        <textarea rows="10" cols="96" bind:this={txtFetch} readonly />
     </div>
     <div>
         <span class="title">Example:</span><br />
@@ -219,12 +216,12 @@
 <div class="area">
     <div>
         <span class="title">Result: </span><br />
-        <textarea rows="10" cols="96" bind:this={txtResult} />
+        <textarea rows="10" cols="96" bind:this={txtResult} readonly />
     </div>
 </div>
 
 <style lang="scss">
-    .fetch {
+    textarea[readonly] {
         background-color: #ffc;
     }
     .title {
