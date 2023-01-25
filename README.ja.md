@@ -1,4 +1,6 @@
 # kit-d1-proxy
+[EN](./README.md)  
+
 Cloudflare D1 の DB をブラウザからでも読み書きできる Web API を構築します。  
 DEMO: [Cloudflare D1 Proxy Playground](https://kit-d1-proxy.pages.dev/)
 
