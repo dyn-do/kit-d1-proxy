@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { Command, CommandName } from "../enums/Mode";
     import type { D1Response } from "../interfaces/D1Response";
-    import { FetchD1Utils } from "../utils/FetchD1";
+    import { FetchD1Utils } from "../utils/FetchD1Utils";
     import fileDownload from "js-file-download";
     import urljoin from "url-join";
 
