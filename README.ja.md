@@ -48,5 +48,7 @@ D1 は Cloudflare が提供する SQLite を用いたクラウド RDB サービ�
 ## 注意事項
 * [バッチ](https://developers.cloudflare.com/d1/platform/client-api/#batch-statements)未対応です。(存在を見落としていました💦)
 
-## 使用フレームワーク
-* Sveltekit 
+## カスタマイズ
+認証無しで操作できたり、Drop Table ができてしまったりするのは危険ですね😅  
+本プロジェクトは Sveltekit で書かれており、API の Request/Response は `routes/[...path]/+server.ts` がほぼ全てです。  
+コード量もとても少ないので、カスタマイズにぜひチャレンジしてみてください！  

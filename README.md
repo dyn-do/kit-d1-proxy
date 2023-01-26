@@ -51,5 +51,7 @@ Let's make the most of Cloudflare D1 😆
 ## Notes
 * [batch](https://developers.cloudflare.com/d1/platform/client-api/#batch-statements) is not supported (I missed its existence 💦)
 
-## Development Framework
-* Sveltekit 
+## Customization
+It's dangerous to be able to operate without authentication or to be able to do things like Drop Table 😅  
+This project is written in Sveltekit and most of the API's Request/Response is in `routes/[...path]/+server.ts`.  
+The codebase is also very small, so please feel free to try customizing it!  
