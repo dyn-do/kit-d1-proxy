@@ -10,6 +10,9 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+	interface RequestInit {
+		duplex?: string
+	}
 }
 
 export { };

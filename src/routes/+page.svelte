@@ -71,7 +71,11 @@
                 paramsStr
             );
             if (res.ok) {
-                const d1Res = (await res.json()) as D1Response;
+                let d1Res = (await res.json()) as D1Response;
+                if (d1Res.result) {
+                    // For Local dev
+                    d1Res = d1Res.result[0];
+                }
                 if (d1Res.success == true) {
                     // D1 Succeess
                     result = JSON.stringify(d1Res.results);

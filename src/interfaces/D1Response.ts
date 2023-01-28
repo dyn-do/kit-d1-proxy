@@ -3,4 +3,7 @@ export interface D1Response {
     success: boolean;
     error: string;
     message: string;
+
+    // for local dev
+    result?: D1Response[];
 }
