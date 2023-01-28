@@ -14,8 +14,8 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
                 const res = new Response(d1res.body);
                 // CORS 
                 res.headers.append('Access-Control-Allow-Origin', "*");
-                res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-                res.headers.append('Access-Control-Allow-Methods', 'POST');
+                // res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+                // res.headers.append('Access-Control-Allow-Methods', 'POST');
                 return res;
             } catch (e) {
                 throw error(500, {
@@ -37,8 +37,8 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
                 const res = new Response(d1res.body);
                 // CORS 
                 res.headers.append('Access-Control-Allow-Origin', "*");
-                res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-                res.headers.append('Access-Control-Allow-Methods', 'POST');
+                // res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+                // res.headers.append('Access-Control-Allow-Methods', 'POST');
                 return res;
             } catch (e) {
                 throw error(500, {
