@@ -11,12 +11,7 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
                 // run d1 call;
                 const conn = new D1ConnectService(platform);
                 const d1res = await conn.fetch(path, request);
-                const res = new Response(d1res.body);
-                // CORS 
-                res.headers.append('Access-Control-Allow-Origin', request.headers.get('Origin') ?? "*");
-                res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-                res.headers.append('Access-Control-Allow-Methods', 'POST');
-                return res;
+                return new Response(d1res.body);
             } catch (e) {
                 throw error(500, {
                     message: ErrorUtils.stackTrace(e)
@@ -34,12 +29,7 @@ export const POST: RequestHandler = async ({ request, params, platform }) => {
                     body: request.body
                 };
                 const d1res = await fetch("https://api.cloudflare.com/client/v4/accounts/1f60a750acc192ddfcb4077542357b40/d1/database/345aa71f-4f63-4ccd-8b40-c5794880c7b2/" + path, requestInit);
-                const res = new Response(d1res.body);
-                // CORS 
-                res.headers.append('Access-Control-Allow-Origin', request.headers.get('Origin') ?? "*");
-                res.headers.append('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-                res.headers.append('Access-Control-Allow-Methods', 'POST');
-                return res;
+                return new Response(d1res.body);
             } catch (e) {
                 throw error(500, {
                     message: ErrorUtils.stackTrace(e)
