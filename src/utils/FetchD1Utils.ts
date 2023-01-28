@@ -18,7 +18,6 @@ export class FetchD1Utils {
             headers: {
                 "content-type": "application/json",
             },
-            mode: 'cors',
             body: jsonBody ? JSON.stringify(jsonBody) : undefined
         };
         return requestInit;
